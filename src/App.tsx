@@ -3,7 +3,7 @@ function App() {
 
   return (
     <>
-      <h1>Pacientes</h1>
+      <h1 className="text-4xl">Pacientes</h1>
     </>
   )
 }
