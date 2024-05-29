@@ -1,11 +1,12 @@
 import { useForm } from 'react-hook-form';
+import { Error } from './Error';
 
 
 export const PatientsForm = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = () => {console.log('Nuevo paciente')};
-  
+  const onSubmit = () => { console.log('Nuevo paciente') };
+
 
   return (
     <div className="md:w-1/2 lg:w-2/5 mx-5">
@@ -24,57 +25,59 @@ export const PatientsForm = () => {
           <label htmlFor="name" className="text-sm uppercase font-bold">
             Paciente
           </label>
-          <input 
-            type="text" 
-            id="name" 
+          <input
+            type="text"
+            id="name"
             className="w-full p-3 border border-gray-100"
             placeholder="Nombre del Paciente"
             {...register('name', {
-              required: 'El nombre del paciente es obligatorio'
+              required: 'El nombre del paciente es obligatorio',
             })}
           />
-          {errors.name?.message}
+          {errors.name &&
+            <Error>{errors.name?.message?.toString()}</Error>
+          }
         </div>
         <div className="mb-5">
           <label htmlFor="email" className="text-sm uppercase font-bold">
             Email
           </label>
-          <input 
-            type="email" 
+          <input
+            type="email"
             id="email"
             placeholder="Email de Registro"
             className="w-full p-3 border border-gray-100"
-            // {...register('email', {
-            //   required: 'El email del paciente es obligatorio'
-            // })}
+          // {...register('email', {
+          //   required: 'El email del paciente es obligatorio'
+          // })}
           />
         </div>
         <div className="mb-5">
           <label htmlFor="date" className="text-sm uppercase font-bold">
             Fecha Alta
           </label>
-          <input 
-            type="date" 
-            name="date" 
+          <input
+            type="date"
+            name="date"
             id="date"
-            className="w-full p-3 border border-gray-100" 
+            className="w-full p-3 border border-gray-100"
           />
         </div>
         <div className="mb-5">
           <label htmlFor="symtoms" className="text-sm uppercase font-bold">
             Síntomas
           </label>
-          <textarea 
-            name="symtoms" 
+          <textarea
+            name="symtoms"
             id="symtoms"
             className="w-full p-3 border border-gray-100"
             placeholder="Síntomas del paciente"
           ></textarea>
         </div>
-        <input 
-          type="submit" 
+        <input
+          type="submit"
           value="Guardar Paciente"
-          className="bg-indigo-600 w-ful p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors" 
+          className="bg-indigo-600 w-ful p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
         />
       </form>
     </div>
