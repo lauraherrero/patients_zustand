@@ -1,4 +1,5 @@
 import { usePatientStore } from "../store"
+import { PatientDetails } from "./PatientDetails";
 
 export const PatientsList = () => {
 
@@ -16,9 +17,11 @@ export const PatientsList = () => {
             <span className="text-indigo-600 font-bold">Pacientes y Citas</span>
           </p>
 
-          <p>Sí hay pacientes</p>
           {patients.map(patient => {
-            return <li key={patient.id}>{patient.name}</li>
+            return <PatientDetails
+              key={patient.id}
+              patient={patient}
+            />
           })}
         </>
       ) : (
