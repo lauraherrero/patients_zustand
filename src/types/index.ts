@@ -1,5 +1,11 @@
-import { ReactNode } from "react"
+export type Patient = {
+  id: string;
+  name: string;
+  caretaker: string;
+  email: string;
+  date: Date;
+  symtoms: string;
+};
 
-export type ErrorProps = {
-  children: ReactNode
-}
+
+export type DraftPatient = Omit<Patient, 'id'>
