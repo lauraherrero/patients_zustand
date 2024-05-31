@@ -13,3 +13,8 @@ export type DraftPatient = Omit<Patient, 'id'>
 export type PatientDetailsProps = {
   patient: Patient;
 }
+
+export type PatientDetailItemProps = {
+  label: string;
+  data: string
+}
