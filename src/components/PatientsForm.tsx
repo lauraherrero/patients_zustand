@@ -1,18 +1,39 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useForm } from 'react-hook-form';
 import { Error } from './Error';
 import { DraftPatient } from '../types';
 import { usePatientStore } from '../store';
+import { useEffect } from 'react';
 
 
 export const PatientsForm = () => {
 
-  const addPatient  = usePatientStore(state => state.addPatient);
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<DraftPatient>();
-  const onSubmit = (data: DraftPatient) => { 
-    addPatient(data);
-    reset();
-   };
+  const addPatient = usePatientStore(state => state.addPatient);
+  const activeId = usePatientStore(state => state.activeId);
+  const patients = usePatientStore(state => state.patients);
+  const updatePatient = usePatientStore(state => state.updatePatient);
 
+  const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm<DraftPatient>();
+
+  useEffect(() => {
+    if (activeId) {
+      const activePatient = patients.filter(patient => patient.id === activeId)[0];
+      setValue('name', activePatient.name);
+      setValue('caretaker', activePatient.caretaker);
+      setValue('email', activePatient.email);
+      setValue('date', activePatient.date);
+      setValue('symtoms', activePatient.symtoms);
+    }
+  }, [activeId]);
+
+  const onSubmit = (data: DraftPatient) => {
+    if (activeId) {
+      updatePatient(data);
+    } else {
+      addPatient(data);
+    }
+    reset();
+  };
 
   return (
     <div className="md:w-1/2 lg:w-2/5 mx-5">
