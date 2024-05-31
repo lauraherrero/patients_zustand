@@ -4,7 +4,7 @@ import { PatientDetails } from "./PatientDetails";
 export const PatientsList = () => {
 
   const patients = usePatientStore(state => state.patients);
-  console.log(patients);
+  //console.log(patients);
 
 
   return (
